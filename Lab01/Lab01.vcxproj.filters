@@ -42,6 +42,12 @@
     <ClCompile Include="ImGUI\imgui_widgets.cpp">
       <Filter>ImGUI</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SDLWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fixMyWin.h">
@@ -70,6 +76,12 @@
     </ClInclude>
     <ClInclude Include="ImGUI\imstb_textedit.h">
       <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLWindow.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
