@@ -1,5 +1,6 @@
 #include "Graphics.h"
-#include <imgui_impl_dx11.h>
+#include "ImGUI/imgui_impl_dx11.h"
+#include <wrl.h>
 
 Graphics::Graphics(HWND hWnd, int width, int height):
 	width(width), height(height)
@@ -40,41 +41,18 @@ Graphics::Graphics(HWND hWnd, int width, int height):
 		nullptr,
 		&pContext
 	);
-	ID3D11Texture2D* pBackBuffer = nullptr;
-	pSwap->GetBuffer(0, IID_PPV_ARGS(&pBackBuffer));
-	//ID3D11Resource* pBackBuffer = nullptr;
-	//pSwap->GetBuffer(
-	//	0,
-	//	__uuidof(ID3D11Resource),
-	//	reinterpret_cast<void**>(&pBackBuffer)
-	//);
+	Microsoft::WRL::ComPtr<ID3D11Resource> pBackBuffer;
+	pSwap->GetBuffer(
+		0,
+		__uuidof(ID3D11Resource),
+		&pBackBuffer
+	);
 	pDevice->CreateRenderTargetView(
-		pBackBuffer,
+		pBackBuffer.Get(),
 		nullptr,
 		&pTarget
 	);
-	pBackBuffer->Release();
-	ImGui_ImplDX11_Init(pDevice, pContext);
-}
-
-Graphics::~Graphics()
-{
-	if (pTarget != nullptr)
-	{
-		pTarget->Release();
-	}
-	if (pContext != nullptr)
-	{
-		pContext->Release();
-	}
-	if (pSwap != nullptr)
-	{
-		pSwap->Release();
-	}
-	if (pDevice != nullptr)
-	{
-		pDevice->Release();
-	}
+	ImGui_ImplDX11_Init(pDevice.Get(), pContext.Get());
 }
 
 void Graphics::EndFrame()

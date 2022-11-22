@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -16,10 +8,26 @@
     <Filter Include="ImGUI">
       <UniqueIdentifier>{78a8c490-7fc5-4373-9d91-2f7d286dcd64}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{0c7f050f-e2bc-4c59-af59-41ad2a79eab3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SDL">
+      <UniqueIdentifier>{91446064-cf4c-4966-8daa-24e4dcee65f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="My App\Graphics">
+      <UniqueIdentifier>{f5246aa6-8e8b-4588-8042-d13f3f7baf75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\SceneObject">
+      <UniqueIdentifier>{c33a53da-3c8f-44dc-b349-d14d14d6493f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>My App</Filter>
     </ClCompile>
     <ClCompile Include="ImGUI\imgui.cpp">
       <Filter>ImGUI</Filter>
@@ -42,20 +50,17 @@
     <ClCompile Include="ImGUI\imgui_widgets.cpp">
       <Filter>ImGUI</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SDLWindow.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>SDL</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>My App\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneObject.cpp">
+      <Filter>My App\SceneObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="fixMyWin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ImGUI\imstb_truetype.h">
-      <Filter>ImGUI</Filter>
-    </ClInclude>
     <ClInclude Include="ImGUI\imconfig.h">
       <Filter>ImGUI</Filter>
     </ClInclude>
@@ -77,11 +82,28 @@
     <ClInclude Include="ImGUI\imstb_textedit.h">
       <Filter>ImGUI</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ImGUI\imstb_truetype.h">
+      <Filter>ImGUI</Filter>
     </ClInclude>
     <ClInclude Include="SDLWindow.h">
-      <Filter>Header Files</Filter>
+      <Filter>SDL</Filter>
     </ClInclude>
+    <ClInclude Include="fixMyWin.h">
+      <Filter>My App</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>My App\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneObject.h">
+      <Filter>My App\SceneObject</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="VertexShader.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="PixelShader.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
