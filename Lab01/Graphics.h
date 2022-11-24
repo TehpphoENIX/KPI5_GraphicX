@@ -1,4 +1,5 @@
 #pragma once
+#pragma comment(lib,"d3d11.lib")
 #pragma comment(lib,"D3DCompiler.lib")
 
 #include "fixMyWin.h"
@@ -12,14 +13,14 @@
 
 const DirectX::XMFLOAT2 TestObjectVertices[] =
 {
-	/*A 0*/{+0.0f,+1.0f},/*B 1*/{+0.3f,+1.0f},
-	/*C 2*/{-0.5f,+0.75f},/*D 3*/{-0.2f,+0.75f},/*E 4*/{+0.1f,+0.75f},
-	/*F 5*/{-0.5f,+0.5f},/*G 6*/{-0.2f,+0.5f},
-	/*H 7*/{-0.2f,+0.25f},
-	/*I 8*/{-0.4f,+0.0f},/*J 9*/{-0.2f,+0.0f},/*K 10*/{+0.3f,+0.0f},
-	/*L 11*/{-0.2f,-0.2f},
-	/*M 12*/{-0.2f,-0.25f},/*N 13*/{+0.1f,-0.25f},
-	/*O 14*/{-0.2f,-0.5f},/*P 15*/{+0.3f,-0.5f}
+	/*A 0*/{+0.0f,+0.697f},/*B 1*/{+0.354f,+0.697f},
+	/*C 2*/{-0.446f,+0.553f},/*D 3*/{-0.2f,+0.553f},/*E 4*/{+0.154f,+0.553f},
+	/*F 5*/{-0.446f,+0.316f},/*G 6*/{-0.2f,+0.316f},
+	/*H 7*/{-0.2f,+0.0f},
+	/*I 8*/{-0.345f,-0.105f},/*J 9*/{-0.2f,-0.105f},/*K 10*/{+0.323f,-0.105f},
+	/*L 11*/{-0.2f,-0.210f},
+	/*M 12*/{-0.2f,-0.342f},/*N 13*/{+0.081f,-0.342f},
+	/*O 14*/{-0.2f,-0.553f},/*P 15*/{+0.323f,-0.553f}
 };
 const unsigned short TestObjectIndicesTriangles[] =
 {
@@ -82,7 +83,6 @@ public:
 		DirectX::XMFLOAT4 outlineColor;
 
 	} Rabbit;
-
 	void CreateTestObject(DirectX::XMFLOAT4 fillColor, DirectX::XMFLOAT4 outlineColor)
 	{
 		//colors

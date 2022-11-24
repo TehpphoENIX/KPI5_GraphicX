@@ -1,4 +1,7 @@
 #pragma once
+#pragma comment(lib,"SDL2.lib")
+#pragma comment(lib,"SDL2main.lib")
+
 #include "fixMyWin.h"
 #include <SDL.h>
 #include <utility>
