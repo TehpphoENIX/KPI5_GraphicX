@@ -39,7 +39,7 @@ Graphics::Graphics(HWND hWnd, int width, int height):
 		sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 		sd.BufferCount = 1;
 		//sd.OutputWindow = hWnd;
-		sd.OutputWindow = (HWND)"X)";
+		sd.OutputWindow = (HWND)"XD";
 		sd.Windowed = TRUE;
 		sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 		sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
@@ -66,7 +66,6 @@ Graphics::Graphics(HWND hWnd, int width, int height):
 		nullptr,
 		0,
 		D3D11_SDK_VERSION,
-		//8,
 		&sd,
 		&pSwap,
 		&pDevice,
