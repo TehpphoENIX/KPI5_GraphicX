@@ -5,22 +5,7 @@
 #include <sstream>
 #include "SDLWindow.h"
 #include "dxerr.h"
-
-// graphics exception checking/throwing macros (some with dxgi infos)
-#define GFX_EXCEPT_NOINFO(hr) Graphics::HrException( __LINE__,__FILE__,(hr) )
-#define GFX_THROW_NOINFO(hrcall) if( FAILED( hr = (hrcall) ) ) throw Graphics::HrException( __LINE__,__FILE__,hr )
-
-#ifndef NDEBUG
-#define GFX_EXCEPT(hr) Graphics::HrException( __LINE__,__FILE__,(hr),infoManager.GetMessages() )
-#define GFX_THROW_INFO(hrcall) infoManager.Set(); if( FAILED( hr = (hrcall) ) ) throw GFX_EXCEPT(hr)
-#define GFX_DEVICE_REMOVED_EXCEPT(hr) Graphics::DeviceRemovedException( __LINE__,__FILE__,(hr),infoManager.GetMessages() )
-#define GFX_THROW_INFO_ONLY(call) infoManager.Set(); (call); {auto v = infoManager.GetMessages(); if(!v.empty()) {throw Graphics::InfoException( __LINE__,__FILE__,v);}}
-#else
-#define GFX_EXCEPT(hr) Graphics::HrException( __LINE__,__FILE__,(hr) )
-#define GFX_THROW_INFO(hrcall) GFX_THROW_NOINFO(hrcall)
-#define GFX_DEVICE_REMOVED_EXCEPT(hr) Graphics::DeviceRemovedException( __LINE__,__FILE__,(hr) )
-#define GFX_THROW_INFO_ONLY(call) (call)
-#endif
+#include "GraphicsThrowMacros.h"
 
 Graphics::Graphics(HWND hWnd, int width, int height):
 	width(width), height(height)
@@ -38,8 +23,7 @@ Graphics::Graphics(HWND hWnd, int width, int height):
 		sd.SampleDesc.Quality = 0;
 		sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 		sd.BufferCount = 1;
-		//sd.OutputWindow = hWnd;
-		sd.OutputWindow = (HWND)"XD";
+		sd.OutputWindow = hWnd;
 		sd.Windowed = TRUE;
 		sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 		sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
@@ -105,6 +89,20 @@ void Graphics::EndFrame()
 	}
 }
 
+void Graphics::DrawIndexed(UINT count) noexcept(!IS_DEBUG)
+{
+	GFX_THROW_INFO_ONLY(pContext->DrawIndexed(count, 0u, 0u));
+}
+
+void Graphics::SetProjection(DirectX::FXMMATRIX proj) noexcept
+{
+	projection = proj;
+}
+
+DirectX::XMMATRIX Graphics::GetProjection() const noexcept
+{
+	return projection;
+}
 //Exception stuff
 Graphics::HrException::HrException(int line, const char* file, HRESULT hr, std::vector<std::string> infoMsgs) noexcept
 	:

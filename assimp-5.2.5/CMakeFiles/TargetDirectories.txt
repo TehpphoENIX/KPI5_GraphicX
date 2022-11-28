@@ -1,0 +1,13 @@
+C:/Users/Krokokoko/source/repos/TehpphoENIX/KPI5_GraphicX/assimp-5.2.5/CMakeFiles/uninstall.dir
+C:/Users/Krokokoko/source/repos/TehpphoENIX/KPI5_GraphicX/assimp-5.2.5/CMakeFiles/UpdateAssimpLibsDebugSymbolsAndDLLs.dir
+C:/Users/Krokokoko/source/repos/TehpphoENIX/KPI5_GraphicX/assimp-5.2.5/CMakeFiles/INSTALL.dir
+C:/Users/Krokokoko/source/repos/TehpphoENIX/KPI5_GraphicX/assimp-5.2.5/CMakeFiles/ALL_BUILD.dir
+C:/Users/Krokokoko/source/repos/TehpphoENIX/KPI5_GraphicX/assimp-5.2.5/CMakeFiles/ZERO_CHECK.dir
+C:/Users/Krokokoko/source/repos/TehpphoENIX/KPI5_GraphicX/assimp-5.2.5/contrib/zlib/CMakeFiles/zlibstatic.dir
+C:/Users/Krokokoko/source/repos/TehpphoENIX/KPI5_GraphicX/assimp-5.2.5/contrib/zlib/CMakeFiles/INSTALL.dir
+C:/Users/Krokokoko/source/repos/TehpphoENIX/KPI5_GraphicX/assimp-5.2.5/contrib/zlib/CMakeFiles/ALL_BUILD.dir
+C:/Users/Krokokoko/source/repos/TehpphoENIX/KPI5_GraphicX/assimp-5.2.5/code/CMakeFiles/assimp.dir
+C:/Users/Krokokoko/source/repos/TehpphoENIX/KPI5_GraphicX/assimp-5.2.5/code/CMakeFiles/INSTALL.dir
+C:/Users/Krokokoko/source/repos/TehpphoENIX/KPI5_GraphicX/assimp-5.2.5/test/CMakeFiles/unit.dir
+C:/Users/Krokokoko/source/repos/TehpphoENIX/KPI5_GraphicX/assimp-5.2.5/test/CMakeFiles/INSTALL.dir
+C:/Users/Krokokoko/source/repos/TehpphoENIX/KPI5_GraphicX/assimp-5.2.5/test/headercheck/CMakeFiles/INSTALL.dir

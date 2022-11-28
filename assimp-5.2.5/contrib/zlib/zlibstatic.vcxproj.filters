@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\adler32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\compress.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\crc32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\deflate.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\gzclose.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\gzlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\gzread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\gzwrite.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\inflate.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\infback.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\inftrees.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\inffast.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\trees.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\uncompr.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\zutil.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\zconf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\zlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\crc32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\deflate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\gzguts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\inffast.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\inffixed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\inflate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\inftrees.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\trees.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\zutil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Krokokoko\source\repos\TehpphoENIX\KPI5_GraphicX\assimp-5.2.5\contrib\zlib\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{563818C5-0D52-3BEC-8FC9-A0348868BB17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{510D1602-AF01-3128-8924-E4B0C43513B0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

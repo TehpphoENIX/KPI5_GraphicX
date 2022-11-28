@@ -9,8 +9,8 @@
 #include <d3dcompiler.h>
 #include <vector>
 #include "DxgiInfoManager.h"
-#include "SceneObject.h"
 #include "ChiliException.h"
+#include <DirectXMath.h>
 
 const DirectX::XMFLOAT2 TestObjectVertices[] =
 {
@@ -48,6 +48,7 @@ const unsigned short TestObjectIndicesLines[] =
 
 class Graphics
 {
+	friend class GraphicsResource;
 public:
 	class Exception : public ChiliException
 	{
@@ -86,6 +87,7 @@ public:
 		std::string reason;
 	};
 private:
+	DirectX::XMMATRIX projection;
 #ifndef NDEBUG
 	DxgiInfoManager infoManager;
 #endif
@@ -107,6 +109,10 @@ public:
 		pContext->OMSetRenderTargets(1u, pTarget.GetAddressOf(), nullptr);
 		pContext->ClearRenderTargetView(pTarget.Get(), clear_color_with_alpha);
 	}
+	void DrawIndexed(UINT count) noexcept(!IS_DEBUG);
+	void SetProjection(DirectX::FXMMATRIX proj) noexcept;
+	DirectX::XMMATRIX GetProjection() const noexcept;
+
 	struct TestObject
 	{
 		Microsoft::WRL::ComPtr<ID3D11Buffer> pVertexBuffer;

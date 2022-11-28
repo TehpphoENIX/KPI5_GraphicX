@@ -13,6 +13,9 @@
 #include <SDL_syswm.h>
 
 #include "SDLWindow.h"
+#include <DirectXMath.h>
+#include "Box.h"
+#include "Bindable.h"
 
 void ImGUiKeyboard();
 
@@ -61,8 +64,12 @@ int CALLBACK WinMain(
         Window window("My new windoW", { 196 * 2,229 * 2 }, window_flags);
         // Setup project variables
         ImVec4 clear_color = ImVec4(1.00f, 0.9453125f, 0.234375f, 1.00f);
-        window.Gfx().CreateTestObject({ 0.0f,0.59765625f,0.98046875f,1.0f }, { 0.0f,0.0f,0.0f,1.0f });
-        ImVec2 pos, vel;
+        DirectX::XMFLOAT3({ 1.0f,1.0f,1.0f });
+        Box box(window.Gfx(),
+            { 1.0f,1.0f,1.0f },
+            { 0.0f,0.0f,0.0f },
+            { 0.0f,0.0f,0.0f });
+;        ImVec2 pos, vel;
         float incr = 0.01f;
         // Main loop
         bool done = false;

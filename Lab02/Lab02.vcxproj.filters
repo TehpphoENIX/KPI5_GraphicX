@@ -5,9 +5,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ImGUI">
-      <UniqueIdentifier>{78a8c490-7fc5-4373-9d91-2f7d286dcd64}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shader">
       <UniqueIdentifier>{0c7f050f-e2bc-4c59-af59-41ad2a79eab3}</UniqueIdentifier>
     </Filter>
@@ -15,29 +12,77 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="My App\Graphics">
-      <UniqueIdentifier>{f5246aa6-8e8b-4588-8042-d13f3f7baf75}</UniqueIdentifier>
+    <Filter Include="My App\Utility">
+      <UniqueIdentifier>{640b367f-f4d9-495b-97d0-d95218293b0c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="My App\SceneObject">
-      <UniqueIdentifier>{c33a53da-3c8f-44dc-b349-d14d14d6493f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="My App\SDL">
-      <UniqueIdentifier>{91446064-cf4c-4966-8daa-24e4dcee65f3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="My App\ChiliException">
+    <Filter Include="My App\Utility\ChiliException">
       <UniqueIdentifier>{f4138221-5704-4ed5-b433-da0f5ed6ede9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="My App\DxgiInfoManager">
+    <Filter Include="My App\Utility\dxerr">
+      <UniqueIdentifier>{1f2d6ce1-0775-4aaa-b94f-f07dc8eab0c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Utility\DxgiInfoManager">
       <UniqueIdentifier>{68666f5a-7a38-4e22-8871-a20905f02d31}</UniqueIdentifier>
     </Filter>
-    <Filter Include="My App\dxerr">
-      <UniqueIdentifier>{1f2d6ce1-0775-4aaa-b94f-f07dc8eab0c3}</UniqueIdentifier>
+    <Filter Include="My App\API">
+      <UniqueIdentifier>{6fddc278-40ff-4976-8873-158adbea1b48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\API\Graphics">
+      <UniqueIdentifier>{f5246aa6-8e8b-4588-8042-d13f3f7baf75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\API\SDL">
+      <UniqueIdentifier>{91446064-cf4c-4966-8daa-24e4dcee65f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Bindable">
+      <UniqueIdentifier>{12dec012-830e-470a-86c1-635e1fbc4269}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Bindable\VertexShader">
+      <UniqueIdentifier>{5c25a5d5-bf3a-413a-910f-33d2975924aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Bindable\PixelShader">
+      <UniqueIdentifier>{9f2eaf54-4623-4b1f-9ed1-952bb7f00dec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Bindable\VertexBuffer">
+      <UniqueIdentifier>{cf456342-5a05-4382-a79e-dbd87b987816}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Bindable\IndexBuffer">
+      <UniqueIdentifier>{e92230cb-c2a0-4696-8aeb-73df45eea6ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Bindable\Topology">
+      <UniqueIdentifier>{9adcef5b-dd5b-47a6-9fa9-6b848672c741}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Bindable\TransformCbuf">
+      <UniqueIdentifier>{8a40cadf-000e-428b-b888-14bcd4f1a49a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Bindable\InputLayout">
+      <UniqueIdentifier>{9fcb1779-3aa0-446b-84d9-2877abaadb5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Bindable\GraphicsResource">
+      <UniqueIdentifier>{2680d0fd-2b7b-466a-8a7c-3ba64c09e18c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Utility\define">
+      <UniqueIdentifier>{d31dca4c-b361-4fa8-8ecd-3a903e84e177}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Bindable\ConstantBuffers">
+      <UniqueIdentifier>{a8c87546-d481-4bbf-8f36-6173bd7e89c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Utility\ChiliUtil">
+      <UniqueIdentifier>{98d5631e-fcff-4f62-82e7-8347032027cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Drawable">
+      <UniqueIdentifier>{f82d6f17-d50c-4fe0-937a-b1a35ba4c618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Drawable\Box">
+      <UniqueIdentifier>{a6633429-24cc-4ca1-bfa6-a4ee743bd601}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Geometry">
+      <UniqueIdentifier>{9431f6bb-ac66-400f-87b8-9fc3c496a00b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGUI">
+      <UniqueIdentifier>{78a8c490-7fc5-4373-9d91-2f7d286dcd64}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="WinMain.cpp">
-      <Filter>My App</Filter>
-    </ClCompile>
     <ClCompile Include="ImGUI\imgui.cpp">
       <Filter>ImGUI</Filter>
     </ClCompile>
@@ -60,22 +105,55 @@
       <Filter>ImGUI</Filter>
     </ClCompile>
     <ClCompile Include="SDLWindow.cpp">
-      <Filter>My App\SDL</Filter>
+      <Filter>My App\API\SDL</Filter>
     </ClCompile>
     <ClCompile Include="Graphics.cpp">
-      <Filter>My App\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneObject.cpp">
-      <Filter>My App\SceneObject</Filter>
+      <Filter>My App\API\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="ChiliException.cpp">
-      <Filter>My App\ChiliException</Filter>
+      <Filter>My App\Utility\ChiliException</Filter>
     </ClCompile>
     <ClCompile Include="DxgiInfoManager.cpp">
-      <Filter>My App\DxgiInfoManager</Filter>
+      <Filter>My App\Utility\DxgiInfoManager</Filter>
     </ClCompile>
     <ClCompile Include="dxerr.cpp">
-      <Filter>My App\dxerr</Filter>
+      <Filter>My App\Utility\dxerr</Filter>
+    </ClCompile>
+    <ClCompile Include="IndexBuffer.cpp">
+      <Filter>My App\Bindable\IndexBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="InputLayout.cpp">
+      <Filter>My App\Bindable\InputLayout</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelShader.cpp">
+      <Filter>My App\Bindable\PixelShader</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexBuffer.cpp">
+      <Filter>My App\Bindable\VertexBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexShader.cpp">
+      <Filter>My App\Bindable\VertexShader</Filter>
+    </ClCompile>
+    <ClCompile Include="Topology.cpp">
+      <Filter>My App\Bindable\Topology</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformCbuf.cpp">
+      <Filter>My App\Bindable\TransformCbuf</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsResource.cpp">
+      <Filter>My App\Bindable\GraphicsResource</Filter>
+    </ClCompile>
+    <ClCompile Include="ChiliUtil.cpp">
+      <Filter>My App\Utility\ChiliUtil</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawable.cpp">
+      <Filter>My App\Drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>My App\Drawable\Box</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>My App</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,33 +182,92 @@
       <Filter>ImGUI</Filter>
     </ClInclude>
     <ClInclude Include="SDLWindow.h">
-      <Filter>My App\SDL</Filter>
-    </ClInclude>
-    <ClInclude Include="fixMyWin.h">
-      <Filter>My App</Filter>
+      <Filter>My App\API\SDL</Filter>
     </ClInclude>
     <ClInclude Include="Graphics.h">
-      <Filter>My App\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneObject.h">
-      <Filter>My App\SceneObject</Filter>
+      <Filter>My App\API\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="ChiliException.h">
-      <Filter>My App\ChiliException</Filter>
+      <Filter>My App\Utility\ChiliException</Filter>
     </ClInclude>
     <ClInclude Include="DxgiInfoManager.h">
-      <Filter>My App\DxgiInfoManager</Filter>
+      <Filter>My App\Utility\DxgiInfoManager</Filter>
     </ClInclude>
     <ClInclude Include="dxerr.h">
-      <Filter>My App\dxerr</Filter>
+      <Filter>My App\Utility\dxerr</Filter>
+    </ClInclude>
+    <ClInclude Include="Bindable.h">
+      <Filter>My App\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexBuffer.h">
+      <Filter>My App\Bindable\IndexBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="InputLayout.h">
+      <Filter>My App\Bindable\InputLayout</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelShader.h">
+      <Filter>My App\Bindable\PixelShader</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBuffer.h">
+      <Filter>My App\Bindable\VertexBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexShader.h">
+      <Filter>My App\Bindable\VertexShader</Filter>
+    </ClInclude>
+    <ClInclude Include="Topology.h">
+      <Filter>My App\Bindable\Topology</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformCbuf.h">
+      <Filter>My App\Bindable\TransformCbuf</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffers.h">
+      <Filter>My App\Bindable\ConstantBuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="fixMyWin.h">
+      <Filter>My App\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsResource.h">
+      <Filter>My App\Bindable\GraphicsResource</Filter>
+    </ClInclude>
+    <ClInclude Include="ConditionalNoexcept.h">
+      <Filter>My App\Utility\define</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsThrowMacros.h">
+      <Filter>My App\Utility\define</Filter>
+    </ClInclude>
+    <ClInclude Include="ChiliUtil.h">
+      <Filter>My App\Utility\ChiliUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawable.h">
+      <Filter>My App\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>My App\Drawable\Box</Filter>
+    </ClInclude>
+    <ClInclude Include="BindableBase.h">
+      <Filter>My App\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexedTriangleList.h">
+      <Filter>My App\Geometry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="VertexShader.hlsl">
+    <FxCompile Include="ColorIndexVS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="PixelShader.hlsl">
+    <FxCompile Include="ColorIndexPS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DXGetErrorDescription.inl">
+      <Filter>My App\Utility\dxerr</Filter>
+    </None>
+    <None Include="DXGetErrorString.inl">
+      <Filter>My App\Utility\dxerr</Filter>
+    </None>
+    <None Include="DXTrace.inl">
+      <Filter>My App\Utility\dxerr</Filter>
+    </None>
   </ItemGroup>
 </Project>
