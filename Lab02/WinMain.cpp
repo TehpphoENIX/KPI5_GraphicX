@@ -5,6 +5,7 @@
 #pragma comment(lib,"version.lib")
 #pragma comment(lib,"Setupapi.lib")
 
+
 #include "ImGUI/imgui.h"
 #include "ImGUI/imgui_impl_sdl.h"
 #include "ImGUI/imgui_impl_dx11.h"
@@ -12,10 +13,12 @@
 #include <SDL.h>
 #include <SDL_syswm.h>
 
+#include "MyMath.h"
 #include "SDLWindow.h"
 #include <DirectXMath.h>
 #include "Box.h"
 #include "Bindable.h"
+#include "Camera.h"
 
 void ImGUiKeyboard();
 
@@ -61,18 +64,25 @@ int CALLBACK WinMain(
         // Setup window
         // Setup Platform/Renderer backends
         SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_ALLOW_HIGHDPI);
-        Window window("My new windoW", { 196 * 2,229 * 2 }, window_flags);
+        Window window("My new windoW", { 640,480 }, window_flags);
         // Setup project variables
-        ImVec4 clear_color = ImVec4(1.00f, 0.9453125f, 0.234375f, 1.00f);
-        DirectX::XMFLOAT3({ 1.0f,1.0f,1.0f });
+        ImVec4 clear_color = ImVec4(0.6f, 0.6f, 0.6f, 1.0f);
+        Camera cam;
         Box box(window.Gfx(),
-            { 1.0f,1.0f,1.0f },
-            { 0.0f,0.0f,0.0f },
+            { 1.0f,1.0f,0.5f },
+            DirectX::XMFLOAT3(),
+            { 0.0f,0.0f,0.0f},
+            DirectX::XMFLOAT3(),
             { 0.0f,0.0f,0.0f });
-;        ImVec2 pos, vel;
-        float incr = 0.01f;
+;        ImVec4 vel,rot;
+        float incr = 0.1f;
         // Main loop
         bool done = false;
+        bool show_demo_window = false;
+        bool is_wireframe = false;
+        bool is_ortho = false;
+
+        DirectX::XMFLOAT3 pos = {5.0f,0.0f,0.0f};
 
         while (!done)
         {
@@ -100,17 +110,52 @@ int CALLBACK WinMain(
                 {
                     /* Check the SDLKey values and move change the coords */
                     switch (event.key.keysym.sym) {
+                    case SDLK_r:
+                        if (!is_ortho)
+                            vel.x = -incr;
+                        break;
+                    case SDLK_f:
+                        if (!is_ortho)
+                            vel.x = incr;
+                        break;
                     case SDLK_a:
-                        vel.x = -incr;
+                        vel.y = -incr;
                         break;
                     case SDLK_d:
-                        vel.x = incr;
-                        break;
-                    case SDLK_w:
                         vel.y = incr;
                         break;
+                    case SDLK_w:
+                        vel.z = incr;
+                        break;
                     case SDLK_s:
-                        vel.y = -incr;
+                        vel.z = -incr;
+                        break;
+
+                    case SDLK_q:
+                        if (is_wireframe)
+                        {
+                            window.Gfx().solid();
+                            is_wireframe = false;
+                        }
+                        else
+                        {
+                            window.Gfx().wireframe();
+                            is_wireframe = true;
+                        }
+                        break;
+                    case SDLK_p:
+                        if (is_ortho)
+                        {
+                            is_ortho = false;
+                            window.Gfx().perspective();
+                        }
+                        break;
+                    case SDLK_u:
+                        if (!is_ortho)
+                        {
+                            is_ortho = true;
+                            window.Gfx().orthographic();
+                        }
                         break;
                     default:
                         break;
@@ -122,26 +167,29 @@ int CALLBACK WinMain(
                 if (event.type == SDL_KEYUP)
                 {
                     switch (event.key.keysym.sym) {
-                    case SDLK_a:
-                        /* We check to make sure the alien is moving */
-                        /* to the left. If it is then we zero the    */
-                        /* velocity. If the alien is moving to the   */
-                        /* right then the right key is still press   */
-                        /* so we don't tocuh the velocity            */
+                    case SDLK_r:
                         if (vel.x < 0)
                             vel.x = 0;
                         break;
-                    case SDLK_d:
+                    case SDLK_f:
                         if (vel.x > 0)
                             vel.x = 0;
                         break;
-                    case SDLK_w:
+                    case SDLK_a:
+                        if (vel.y < 0)
+                            vel.y = 0;
+                        break;
+                    case SDLK_d:
                         if (vel.y > 0)
                             vel.y = 0;
                         break;
+                    case SDLK_w:
+                        if (vel.z > 0)
+                            vel.z = 0;
+                        break;
                     case SDLK_s:
-                        if (vel.y < 0)
-                            vel.y = 0;
+                        if (vel.z < 0)
+                            vel.z = 0;
                         break;
                     default:
                         break;
@@ -149,23 +197,34 @@ int CALLBACK WinMain(
                 }
 
             }
-
-            pos.x += vel.x;
-            pos.y += vel.y;
-
+            //update local cam pos
+            pos.x = pos.x + vel.x;
+            if (pos.x < 1.0f) pos.x = 1.0f;
+            pos.y = NormalizeAngle(pos.y + vel.y);
+            pos.z = NormalizeAngle(pos.z + vel.z);
+            if (pos.z > M_PI / 2 || pos.z < -M_PI / 2)
+                pos.z = sgn(pos.z) * M_PI / 2;
+            //Set enviroment updates
+            cam.SetPositionSph(pos);
+            box.Update(1.0f / 60);
+            window.Gfx().SetCamera(cam.GetMatrix());
+            //render
             window.Gfx().ClearBuffer(clear_color);
-            window.Gfx().DrawTestObject({ pos.x,pos.y });
+            box.Draw(window.Gfx());
             // Start the Dear ImGui frame
             ImGui_ImplDX11_NewFrame();
             ImGui_ImplSDL2_NewFrame();
             ImGui::NewFrame();
+            cam.SpawnControlWindow();
 #ifndef NDEBUG
+            if (show_demo_window)
+                ImGui::ShowDemoWindow(&show_demo_window);
             {
                 ImGui::Begin("Debug", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
-                ImGui::Text("Position:(%f,%f)", pos.x, pos.y);
+                ImGui::ColorEdit4("Clear color", (float*)&clear_color, ImGuiColorEditFlags_NoInputs);
                 ImGui::SameLine();
-                if (ImGui::Button("reset"))
-                    pos = { 0,0 };
+                if (ImGui::Button("reset position"))
+                    pos = { 0,0,0 };
                 ImGui::SliderFloat("velocity", &incr, 0.0000001f, 0.2f);
                 ImGUiKeyboard();
                 ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
@@ -181,7 +240,6 @@ int CALLBACK WinMain(
             }
             window.Gfx().EndFrame(); // Present with vsync
         }
-
         // Cleanup
         ImGui_ImplDX11_Shutdown();
         ImGui_ImplSDL2_Shutdown();

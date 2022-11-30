@@ -12,6 +12,11 @@ public:
 		DirectX::XMFLOAT3 speed = { 0.0f,0.0f,0.0f }, 
 		DirectX::XMFLOAT3 angularSpeed = { 0.0f,0.0f,0.0f });
 	void Update(float dt) noexcept override;
+	void UpdateDimensions(DirectX::XMFLOAT3 dimensions);
+	void UpdatePosition(DirectX::XMFLOAT3 translation);
+	void UpdateRotation(DirectX::XMFLOAT3 rotation);
+	void UpdateSpeed(DirectX::XMFLOAT3 speed = { 0.0f,0.0f,0.0f });
+	void UpdateAngularSpeed(DirectX::XMFLOAT3 angularSpeed = { 0.0f,0.0f,0.0f });
 	DirectX::XMMATRIX GetTransformXM() const noexcept override;
 private:
 	// positional

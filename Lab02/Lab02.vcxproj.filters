@@ -81,6 +81,12 @@
     <Filter Include="ImGUI">
       <UniqueIdentifier>{78a8c490-7fc5-4373-9d91-2f7d286dcd64}</UniqueIdentifier>
     </Filter>
+    <Filter Include="My App\Utility\MyMath">
+      <UniqueIdentifier>{15ce2202-eb42-4064-b42b-9a2051c0f9ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Utility\Camera">
+      <UniqueIdentifier>{41f1ecbf-121f-4796-ad8d-b0717a56f95f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImGUI\imgui.cpp">
@@ -154,6 +160,12 @@
     </ClCompile>
     <ClCompile Include="WinMain.cpp">
       <Filter>My App</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMath.cpp">
+      <Filter>My App\Utility\MyMath</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>My App\Utility\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +261,12 @@
     </ClInclude>
     <ClInclude Include="IndexedTriangleList.h">
       <Filter>My App\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMath.h">
+      <Filter>My App\Utility\MyMath</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>My App\Utility\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

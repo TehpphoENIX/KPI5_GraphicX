@@ -2,6 +2,7 @@
 #include "BindableBase.h"
 #include "GraphicsThrowMacros.h"
 #include "IndexedTriangleList.h"
+#include "MyMath.h"
 
 
 Box::Box(Graphics& gfx,
@@ -10,12 +11,14 @@ Box::Box(Graphics& gfx,
 	DirectX::XMFLOAT3 rotation,
 	DirectX::XMFLOAT3 speed,
 	DirectX::XMFLOAT3 angularSpeed)
-	:
-	x(translation.x),y(translation.y),z(translation.z),
-	roll(rotation.x),pitch(rotation.y),yaw(rotation.z),
-	dx(speed.x),dy(speed.y),dz(speed.z),
-	droll(angularSpeed.x),dpitch(angularSpeed.x),dyaw(angularSpeed.x)
 {
+	// model deformation transform (per instance, not stored as bind)
+	UpdateDimensions(dimensions);
+	UpdatePosition(translation);
+	UpdateRotation(rotation);
+	UpdateSpeed(speed);
+	UpdateAngularSpeed(angularSpeed);
+
 	namespace dx = DirectX;
 
 	struct Vertex
@@ -93,24 +96,53 @@ Box::Box(Graphics& gfx,
 
 	AddBind(std::make_unique<Topology>(gfx, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
 
-
 	AddBind(std::make_unique<TransformCbuf>(gfx, *this));
-
-	// model deformation transform (per instance, not stored as bind)
-	dx::XMStoreFloat3x3(
-		&mt,
-		dx::XMMatrixScaling(dimensions.x, dimensions.y, dimensions.z)
-	);
 }
 
 void Box::Update(float dt) noexcept
 {
-	roll += droll * dt;
-	pitch += dpitch * dt;
-	yaw += dyaw * dt;
+	roll = NormalizeAngle(roll + droll * dt);
+	pitch = NormalizeAngle(pitch + dpitch * dt);
+	yaw = NormalizeAngle(yaw + dyaw * dt);
 	x += dx * dt;
 	y += dy * dt;
 	z += dz * dt;
+}
+
+void Box::UpdateDimensions(DirectX::XMFLOAT3 dimensions)
+{
+	DirectX::XMStoreFloat3x3(
+		&mt,
+		DirectX::XMMatrixScaling(dimensions.x, dimensions.y, dimensions.z)
+	);
+}
+
+void Box::UpdatePosition(DirectX::XMFLOAT3 translation)
+{
+	x = translation.x;
+	y = translation.y;
+	z = translation.z;
+}
+
+void Box::UpdateRotation(DirectX::XMFLOAT3 rotation)
+{
+	roll = rotation.x;
+	pitch = rotation.y;
+	yaw = rotation.z;
+}
+
+void Box::UpdateSpeed(DirectX::XMFLOAT3 speed)
+{
+	dx = speed.x; 
+	dy=speed.y; 
+	dz=speed.z;
+}
+
+void Box::UpdateAngularSpeed(DirectX::XMFLOAT3 angularSpeed)
+{
+	droll = angularSpeed.x;
+	dpitch = angularSpeed.y;
+	dyaw = angularSpeed.z;
 }
 
 DirectX::XMMATRIX Box::GetTransformXM() const noexcept
@@ -118,6 +150,5 @@ DirectX::XMMATRIX Box::GetTransformXM() const noexcept
 	namespace dx = DirectX;
 	return dx::XMLoadFloat3x3(&mt) *
 		dx::XMMatrixRotationRollPitchYaw(pitch, yaw, roll) *
-		dx::XMMatrixTranslation(x, y, z) *
-		dx::XMMatrixTranslation(0.0f, 0.0f, 20.0f);
+		dx::XMMatrixTranslation(x, y, z);
 }

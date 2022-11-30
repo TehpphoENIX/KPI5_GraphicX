@@ -158,6 +158,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ChiliException.cpp" />
     <ClCompile Include="ChiliUtil.cpp" />
     <ClCompile Include="Drawable.cpp" />
@@ -174,6 +175,7 @@
     <ClCompile Include="ImGUI\imgui_widgets.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="InputLayout.cpp" />
+    <ClCompile Include="MyMath.cpp" />
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="SDLWindow.cpp" />
     <ClCompile Include="Topology.cpp" />
@@ -186,6 +188,7 @@
     <ClInclude Include="Bindable.h" />
     <ClInclude Include="BindableBase.h" />
     <ClInclude Include="Box.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliUtil.h" />
     <ClInclude Include="ConditionalNoexcept.h" />
@@ -208,6 +211,7 @@
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="IndexedTriangleList.h" />
     <ClInclude Include="InputLayout.h" />
+    <ClInclude Include="MyMath.h" />
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="SDLWindow.h" />
     <ClInclude Include="Topology.h" />

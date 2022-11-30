@@ -8,7 +8,8 @@
 #include "GraphicsThrowMacros.h"
 
 Graphics::Graphics(HWND hWnd, int width, int height):
-	width(width), height(height)
+	width(width), height(height),
+	projection(DirectX::XMMatrixPerspectiveLH(1.0f,((float)height)/width,0.5f,40.0f))
 {
 	DXGI_SWAP_CHAIN_DESC sd = {};
 	{
@@ -69,6 +70,58 @@ Graphics::Graphics(HWND hWnd, int width, int height):
 		&pTarget
 	));
 	ImGui_ImplDX11_Init(pDevice.Get(), pContext.Get());
+	// create depth stensil state
+	D3D11_DEPTH_STENCIL_DESC dsDesc = {};
+	dsDesc.DepthEnable = TRUE;
+	dsDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+	dsDesc.DepthFunc = D3D11_COMPARISON_LESS;
+	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> pDSState;
+	GFX_THROW_INFO(pDevice->CreateDepthStencilState(&dsDesc, &pDSState));
+
+	// bind depth state
+	pContext->OMSetDepthStencilState(pDSState.Get(), 1u);
+
+	// create depth stensil texture
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> pDepthStencil;
+	D3D11_TEXTURE2D_DESC descDepth = {};
+	descDepth.Width = 800u;
+	descDepth.Height = 600u;
+	descDepth.MipLevels = 1u;
+	descDepth.ArraySize = 1u;
+	descDepth.Format = DXGI_FORMAT_D32_FLOAT;
+	descDepth.SampleDesc.Count = 1u;
+	descDepth.SampleDesc.Quality = 0u;
+	descDepth.Usage = D3D11_USAGE_DEFAULT;
+	descDepth.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	GFX_THROW_INFO(pDevice->CreateTexture2D(&descDepth, nullptr, &pDepthStencil));
+
+	// create view of depth stensil texture
+	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV = {};
+	descDSV.Format = DXGI_FORMAT_D32_FLOAT;
+	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	descDSV.Texture2D.MipSlice = 0u;
+	GFX_THROW_INFO(pDevice->CreateDepthStencilView(
+		pDepthStencil.Get(), &descDSV, &pDSV
+	));
+
+	// bind depth stensil view to OM
+	pContext->OMSetRenderTargets(1u, pTarget.GetAddressOf(), pDSV.Get());
+	// configure viewport
+	D3D11_VIEWPORT vp;
+	vp.Width = width;
+	vp.Height = height;
+	vp.MinDepth = 0.0f;
+	vp.MaxDepth = 1.0f;
+	vp.TopLeftX = 0.0f;
+	vp.TopLeftY = 0.0f;
+	pContext->RSSetViewports(1u, &vp);
+
+	D3D11_RASTERIZER_DESC rsd = {};
+	{
+		rsd.FillMode = D3D11_FILL_WIREFRAME;
+		rsd.CullMode = D3D11_CULL_NONE;
+	}
+	GFX_THROW_INFO(pDevice->CreateRasterizerState(&rsd, &pRSWireframe));
 }
 void Graphics::EndFrame()
 {
@@ -103,6 +156,35 @@ DirectX::XMMATRIX Graphics::GetProjection() const noexcept
 {
 	return projection;
 }
+void Graphics::SetCamera(DirectX::FXMMATRIX cam) noexcept
+{
+	camera = cam;
+}
+DirectX::XMMATRIX Graphics::GetCamera() const noexcept
+{
+	return camera;
+}
+void Graphics::wireframe()
+{
+	GFX_THROW_INFO_ONLY(pContext->RSSetState(pRSWireframe.Get()));
+}
+
+void Graphics::solid()
+{
+	GFX_THROW_INFO_ONLY(pContext->RSSetState(nullptr));
+}
+
+void Graphics::perspective(float nearZ, float farZ)
+{
+	projection = DirectX::XMMatrixPerspectiveLH(1.0f, ((float)height) / width, nearZ, farZ);
+}
+
+void Graphics::orthographic(float nearZ, float farZ)
+{
+	projection = DirectX::XMMatrixOrthographicLH(1.0f, ((float)height) / width, nearZ, farZ)*
+		DirectX::XMMatrixScaling(0.25f, 0.25f, 0.25f);
+}
+
 //Exception stuff
 Graphics::HrException::HrException(int line, const char* file, HRESULT hr, std::vector<std::string> infoMsgs) noexcept
 	:
@@ -121,7 +203,6 @@ Graphics::HrException::HrException(int line, const char* file, HRESULT hr, std::
 		info.pop_back();
 	}
 }
-
 const char* Graphics::HrException::what() const noexcept
 {
 	std::ostringstream oss;
@@ -138,35 +219,28 @@ const char* Graphics::HrException::what() const noexcept
 	whatBuffer = oss.str();
 	return whatBuffer.c_str();
 }
-
 const char* Graphics::HrException::GetType() const noexcept
 {
 	return "Chili Graphics Exception";
 }
-
 HRESULT Graphics::HrException::GetErrorCode() const noexcept
 {
 	return hr;
 }
-
 std::string Graphics::HrException::GetErrorString() const noexcept
 {
 	return DXGetErrorStringA(hr);
 }
-
 std::string Graphics::HrException::GetErrorDescription() const noexcept
 {
 	char buf[512];
 	DXGetErrorDescriptionA(hr, buf, sizeof(buf));
 	return buf;
 }
-
 std::string Graphics::HrException::GetErrorInfo() const noexcept
 {
 	return info;
 }
-
-
 const char* Graphics::DeviceRemovedException::GetType() const noexcept
 {
 	return "Chili Graphics Exception [Device Removed] (DXGI_ERROR_DEVICE_REMOVED)";
@@ -187,8 +261,6 @@ Graphics::InfoException::InfoException(int line, const char* file, std::vector<s
 		info.pop_back();
 	}
 }
-
-
 const char* Graphics::InfoException::what() const noexcept
 {
 	std::ostringstream oss;
@@ -198,12 +270,10 @@ const char* Graphics::InfoException::what() const noexcept
 	whatBuffer = oss.str();
 	return whatBuffer.c_str();
 }
-
 const char* Graphics::InfoException::GetType() const noexcept
 {
 	return "Chili Graphics Info Exception";
 }
-
 std::string Graphics::InfoException::GetErrorInfo() const noexcept
 {
 	return info;
