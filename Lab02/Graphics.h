@@ -107,12 +107,7 @@ public:
 	~Graphics() = default;
 
 	void EndFrame();
-	void ClearBuffer(ImVec4 clear_color) noexcept
-	{
-		const float clear_color_with_alpha[4] = { clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w };
-		pContext->OMSetRenderTargets(1u, pTarget.GetAddressOf(), nullptr);
-		pContext->ClearRenderTargetView(pTarget.Get(), clear_color_with_alpha);
-	}
+	void ClearBuffer(ImVec4 clear_color) noexcept;
 	void DrawIndexed(UINT count) noexcept(!IS_DEBUG);
 
 	void SetProjection(DirectX::FXMMATRIX proj) noexcept;

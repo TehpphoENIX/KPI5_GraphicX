@@ -84,8 +84,8 @@ Graphics::Graphics(HWND hWnd, int width, int height):
 	// create depth stensil texture
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> pDepthStencil;
 	D3D11_TEXTURE2D_DESC descDepth = {};
-	descDepth.Width = 800u;
-	descDepth.Height = 600u;
+	descDepth.Width = width;
+	descDepth.Height = height;
 	descDepth.MipLevels = 1u;
 	descDepth.ArraySize = 1u;
 	descDepth.Format = DXGI_FORMAT_D32_FLOAT;
@@ -104,8 +104,6 @@ Graphics::Graphics(HWND hWnd, int width, int height):
 		pDepthStencil.Get(), &descDSV, &pDSV
 	));
 
-	// bind depth stensil view to OM
-	pContext->OMSetRenderTargets(1u, pTarget.GetAddressOf(), pDSV.Get());
 	// configure viewport
 	D3D11_VIEWPORT vp;
 	vp.Width = width;
@@ -140,6 +138,14 @@ void Graphics::EndFrame()
 			throw GFX_EXCEPT(hr);
 		}
 	}
+}
+
+void Graphics::ClearBuffer(ImVec4 clear_color) noexcept
+{
+	const float clear_color_with_alpha[4] = { clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w };
+	pContext->OMSetRenderTargets(1u, pTarget.GetAddressOf(), pDSV.Get());
+	pContext->ClearRenderTargetView(pTarget.Get(), clear_color_with_alpha);
+	pContext->ClearDepthStencilView(pDSV.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0u);
 }
 
 void Graphics::DrawIndexed(UINT count) noexcept(!IS_DEBUG)

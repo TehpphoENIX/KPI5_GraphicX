@@ -87,6 +87,12 @@
     <Filter Include="My App\Utility\Camera">
       <UniqueIdentifier>{41f1ecbf-121f-4796-ad8d-b0717a56f95f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="My App\Drawable\Torus">
+      <UniqueIdentifier>{f307c119-6dae-4bfc-8622-54227d14a26c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Drawable\GraphPlane">
+      <UniqueIdentifier>{a2e7a36a-cc6d-423f-8e62-74124d4f172d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImGUI\imgui.cpp">
@@ -166,6 +172,12 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>My App\Utility\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Torus.cpp">
+      <Filter>My App\Drawable\Torus</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphPlane.cpp">
+      <Filter>My App\Drawable\GraphPlane</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -267,6 +279,12 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>My App\Utility\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Torus.h">
+      <Filter>My App\Drawable\Torus</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphPlane.h">
+      <Filter>My App\Drawable\GraphPlane</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

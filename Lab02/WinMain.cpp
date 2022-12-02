@@ -17,6 +17,8 @@
 #include "SDLWindow.h"
 #include <DirectXMath.h>
 #include "Box.h"
+#include "Torus.h"
+#include "GraphPlane.h"
 #include "Bindable.h"
 #include "Camera.h"
 
@@ -69,21 +71,37 @@ int CALLBACK WinMain(
         ImVec4 clear_color = ImVec4(0.6f, 0.6f, 0.6f, 1.0f);
         Camera cam;
         Box box(window.Gfx(),
-            { 1.0f,1.0f,0.5f },
-            DirectX::XMFLOAT3(),
+            { 1.0f,1.0f,1.0f },
+            { 0.0f,2.0f,0.0f },
             { 0.0f,0.0f,0.0f},
             DirectX::XMFLOAT3(),
-            { 0.0f,0.0f,0.0f });
-;        ImVec4 vel,rot;
+            { 1.0f,0.0f,0.0f });
+
+        Torus tor(window.Gfx(),
+            { 1.0f,1.0f,1.0f },
+            { -0.370f,-1.481f,-0.523f },
+            DirectX::XMFLOAT3(), 
+            DirectX::XMFLOAT3(),
+            { 1.0f,0.0f,0.0f },
+            DirectX::XMFLOAT3(),
+            0.5f);
+
+        GraphPlane graph(window.Gfx(),
+            { 10.0f,10.0f,0.5f },
+            { 0.0f,0.0f,-1.0f },
+            DirectX::XMFLOAT3(),
+            DirectX::XMFLOAT3(),
+            DirectX::XMFLOAT3(),
+            DirectX::XMFLOAT3(), 10.0f
+        );
+        DirectX::XMFLOAT3 pos = { 5.0f,0.0f,0.0f };
+;       ImVec4 vel;
         float incr = 0.1f;
         // Main loop
         bool done = false;
         bool show_demo_window = false;
         bool is_wireframe = false;
         bool is_ortho = false;
-
-        DirectX::XMFLOAT3 pos = {5.0f,0.0f,0.0f};
-
         while (!done)
         {
             // Poll and handle events (inputs, window resize, etc.)
@@ -197,20 +215,31 @@ int CALLBACK WinMain(
                 }
 
             }
-            //update local cam pos
-            pos.x = pos.x + vel.x;
-            if (pos.x < 1.0f) pos.x = 1.0f;
-            pos.y = NormalizeAngle(pos.y + vel.y);
-            pos.z = NormalizeAngle(pos.z + vel.z);
-            if (pos.z > M_PI / 2 || pos.z < -M_PI / 2)
-                pos.z = sgn(pos.z) * M_PI / 2;
+            //update local cam position
+            {
+                pos.x = pos.x + vel.x;
+                if (pos.x < 1.0f) pos.x = 1.0f;
+                pos.y = NormalizeAngle(pos.y + vel.y);
+                pos.z = NormalizeAngle(pos.z + vel.z);
+                if (pos.z > M_PI / 2 - 0.001)
+                    pos.z = M_PI / 2 - 0.001;
+                if (pos.z < -M_PI / 2 + 0.001)
+                    pos.z = -M_PI / 2 + 0.001;
+            }
+
             //Set enviroment updates
             cam.SetPositionSph(pos);
-            box.Update(1.0f / 60);
             window.Gfx().SetCamera(cam.GetMatrix());
+
+            box.Update(1.0f / 60);
+            tor.Update(1.0f / 60);
+            graph.Update(1.0f / 60);
             //render
             window.Gfx().ClearBuffer(clear_color);
             box.Draw(window.Gfx());
+            tor.Draw(window.Gfx());
+            graph.Draw(window.Gfx());
+
             // Start the Dear ImGui frame
             ImGui_ImplDX11_NewFrame();
             ImGui_ImplSDL2_NewFrame();
@@ -219,17 +248,21 @@ int CALLBACK WinMain(
 #ifndef NDEBUG
             if (show_demo_window)
                 ImGui::ShowDemoWindow(&show_demo_window);
+            ImGui::Begin("Debug", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
             {
-                ImGui::Begin("Debug", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
+                //bg color
                 ImGui::ColorEdit4("Clear color", (float*)&clear_color, ImGuiColorEditFlags_NoInputs);
-                ImGui::SameLine();
-                if (ImGui::Button("reset position"))
+                //cam position
+                if (ImGui::Button("reset camera position"))
                     pos = { 0,0,0 };
+                //cam rotation velocity
                 ImGui::SliderFloat("velocity", &incr, 0.0000001f, 0.2f);
+                //keyboard
                 ImGUiKeyboard();
+                //fps
                 ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-                ImGui::End();
             }
+            ImGui::End();
 #endif
             ImGui::Render();
             ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
@@ -240,6 +273,7 @@ int CALLBACK WinMain(
             }
             window.Gfx().EndFrame(); // Present with vsync
         }
+
         // Cleanup
         ImGui_ImplDX11_Shutdown();
         ImGui_ImplSDL2_Shutdown();
