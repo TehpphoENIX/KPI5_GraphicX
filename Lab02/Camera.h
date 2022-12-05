@@ -10,7 +10,6 @@ public:
 		DirectX::XMFLOAT3 rotation = {0,0,0});
 	
 	DirectX::XMMATRIX GetMatrix() const noexcept;
-	DirectX::XMMATRIX GetOrbitingMatrix() const noexcept;
 	void SpawnControlWindow() noexcept;
 	void SetPositionCart(DirectX::XMFLOAT3 camPosition);
 	void SetPositionSph(DirectX::XMFLOAT3 camPosition);

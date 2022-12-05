@@ -139,7 +139,6 @@ void Graphics::EndFrame()
 		}
 	}
 }
-
 void Graphics::ClearBuffer(ImVec4 clear_color) noexcept
 {
 	const float clear_color_with_alpha[4] = { clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w };
@@ -147,17 +146,14 @@ void Graphics::ClearBuffer(ImVec4 clear_color) noexcept
 	pContext->ClearRenderTargetView(pTarget.Get(), clear_color_with_alpha);
 	pContext->ClearDepthStencilView(pDSV.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0u);
 }
-
 void Graphics::DrawIndexed(UINT count) noexcept(!IS_DEBUG)
 {
 	GFX_THROW_INFO_ONLY(pContext->DrawIndexed(count, 0u, 0u));
 }
-
 void Graphics::SetProjection(DirectX::FXMMATRIX proj) noexcept
 {
 	projection = proj;
 }
-
 DirectX::XMMATRIX Graphics::GetProjection() const noexcept
 {
 	return projection;
@@ -174,17 +170,14 @@ void Graphics::wireframe()
 {
 	GFX_THROW_INFO_ONLY(pContext->RSSetState(pRSWireframe.Get()));
 }
-
 void Graphics::solid()
 {
 	GFX_THROW_INFO_ONLY(pContext->RSSetState(nullptr));
 }
-
 void Graphics::perspective(float nearZ, float farZ)
 {
 	projection = DirectX::XMMatrixPerspectiveLH(1.0f, ((float)height) / width, nearZ, farZ);
 }
-
 void Graphics::orthographic(float nearZ, float farZ)
 {
 	projection = DirectX::XMMatrixOrthographicLH(1.0f, ((float)height) / width, nearZ, farZ)*
