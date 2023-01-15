@@ -9,7 +9,7 @@
 
 Graphics::Graphics(HWND hWnd, int width, int height):
 	width(width), height(height),
-	projection(DirectX::XMMatrixPerspectiveLH(1.0f,((float)height)/width,0.5f,40.0f))
+	projection(DirectX::XMMatrixPerspectiveLH(1.0f,((float)height)/width,0.5f,150.0f))
 {
 	DXGI_SWAP_CHAIN_DESC sd = {};
 	{

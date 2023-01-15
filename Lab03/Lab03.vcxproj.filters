@@ -72,9 +72,6 @@
     <Filter Include="My App\Drawable">
       <UniqueIdentifier>{f82d6f17-d50c-4fe0-937a-b1a35ba4c618}</UniqueIdentifier>
     </Filter>
-    <Filter Include="My App\Drawable\Box">
-      <UniqueIdentifier>{a6633429-24cc-4ca1-bfa6-a4ee743bd601}</UniqueIdentifier>
-    </Filter>
     <Filter Include="My App\Geometry">
       <UniqueIdentifier>{9431f6bb-ac66-400f-87b8-9fc3c496a00b}</UniqueIdentifier>
     </Filter>
@@ -87,11 +84,44 @@
     <Filter Include="My App\Utility\Camera">
       <UniqueIdentifier>{41f1ecbf-121f-4796-ad8d-b0717a56f95f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="My App\Drawable\Torus">
+    <Filter Include="My App\API\WIC">
+      <UniqueIdentifier>{25811635-8af3-481b-b253-4194ba0c67c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Bindable\Texture">
+      <UniqueIdentifier>{23fb43d9-eec3-4bd1-9c9e-18cf592dd15e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Bindable\Sampler">
+      <UniqueIdentifier>{0fa97bba-8255-4079-adf5-708c636004a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\ColorIndex">
+      <UniqueIdentifier>{a2394e23-056e-4bbc-87c2-99da7c5e9bc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\Textured">
+      <UniqueIdentifier>{b42995cc-c784-49d2-8950-626210b5bd1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Drawable\Planet">
       <UniqueIdentifier>{f307c119-6dae-4bfc-8622-54227d14a26c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="My App\Drawable\GraphPlane">
-      <UniqueIdentifier>{a2e7a36a-cc6d-423f-8e62-74124d4f172d}</UniqueIdentifier>
+    <Filter Include="My App\Transformations">
+      <UniqueIdentifier>{28339895-c13a-4529-b31e-2a2e4ae12b83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Transformations\Move">
+      <UniqueIdentifier>{d5c92aac-0c54-4ac6-bd42-c74484824db0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Transformations\Rotate">
+      <UniqueIdentifier>{38743936-0230-434c-b33a-e536d36f1cf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Transformations\Orbit">
+      <UniqueIdentifier>{14215480-ceb4-41e3-a6c1-2292a9135e16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader\Phong">
+      <UniqueIdentifier>{f50d5c0b-ebdd-4520-a1c9-88e8fd0bf1d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Lights">
+      <UniqueIdentifier>{77fd0a22-9f25-4d07-b1f8-4cb521a4105b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Lights\PointLight">
+      <UniqueIdentifier>{74fb6a48-08cd-4197-9d44-c188351844f4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -161,9 +191,6 @@
     <ClCompile Include="Drawable.cpp">
       <Filter>My App\Drawable</Filter>
     </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>My App\Drawable\Box</Filter>
-    </ClCompile>
     <ClCompile Include="WinMain.cpp">
       <Filter>My App</Filter>
     </ClCompile>
@@ -173,11 +200,29 @@
     <ClCompile Include="Camera.cpp">
       <Filter>My App\Utility\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Torus.cpp">
-      <Filter>My App\Drawable\Torus</Filter>
+    <ClCompile Include="Planet.cpp">
+      <Filter>My App\Drawable\Planet</Filter>
     </ClCompile>
-    <ClCompile Include="GraphPlane.cpp">
-      <Filter>My App\Drawable\GraphPlane</Filter>
+    <ClCompile Include="WIC.cpp">
+      <Filter>My App\API\WIC</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>My App\Bindable\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Sampler.cpp">
+      <Filter>My App\Bindable\Sampler</Filter>
+    </ClCompile>
+    <ClCompile Include="Move.cpp">
+      <Filter>My App\Transformations\Move</Filter>
+    </ClCompile>
+    <ClCompile Include="Rotate.cpp">
+      <Filter>My App\Transformations\Rotate</Filter>
+    </ClCompile>
+    <ClCompile Include="Orbit.cpp">
+      <Filter>My App</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLight.cpp">
+      <Filter>My App\Lights\PointLight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -265,9 +310,6 @@
     <ClInclude Include="Drawable.h">
       <Filter>My App\Drawable</Filter>
     </ClInclude>
-    <ClInclude Include="Box.h">
-      <Filter>My App\Drawable\Box</Filter>
-    </ClInclude>
     <ClInclude Include="BindableBase.h">
       <Filter>My App\Bindable</Filter>
     </ClInclude>
@@ -280,19 +322,50 @@
     <ClInclude Include="Camera.h">
       <Filter>My App\Utility\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Torus.h">
-      <Filter>My App\Drawable\Torus</Filter>
+    <ClInclude Include="Planet.h">
+      <Filter>My App\Drawable\Planet</Filter>
     </ClInclude>
-    <ClInclude Include="GraphPlane.h">
-      <Filter>My App\Drawable\GraphPlane</Filter>
+    <ClInclude Include="WIC.h">
+      <Filter>My App\API\WIC</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>My App\Bindable\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Sampler.h">
+      <Filter>My App\Bindable\Sampler</Filter>
+    </ClInclude>
+    <ClInclude Include="Transformation.h">
+      <Filter>My App\Transformations</Filter>
+    </ClInclude>
+    <ClInclude Include="Move.h">
+      <Filter>My App\Transformations\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="Rotate.h">
+      <Filter>My App\Transformations\Rotate</Filter>
+    </ClInclude>
+    <ClInclude Include="Orbit.h" />
+    <ClInclude Include="PointLight.h">
+      <Filter>My App\Lights\PointLight</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="ColorIndexVS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
     <FxCompile Include="ColorIndexPS.hlsl">
-      <Filter>Shader</Filter>
+      <Filter>Shader\ColorIndex</Filter>
+    </FxCompile>
+    <FxCompile Include="ColorIndexVS.hlsl">
+      <Filter>Shader\ColorIndex</Filter>
+    </FxCompile>
+    <FxCompile Include="TexturedPS.hlsl">
+      <Filter>Shader\Textured</Filter>
+    </FxCompile>
+    <FxCompile Include="TexturedVS.hlsl">
+      <Filter>Shader\Textured</Filter>
+    </FxCompile>
+    <FxCompile Include="TexturedPhongPS.hlsl">
+      <Filter>Shader\Phong</Filter>
+    </FxCompile>
+    <FxCompile Include="TexturedPhongVS.hlsl">
+      <Filter>Shader\Phong</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>
@@ -307,5 +380,10 @@
     </None>
     <None Include="ClassDiagram.cd" />
     <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Textures\Checker.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -12,15 +12,17 @@
 #include <stdio.h>
 #include <SDL.h>
 #include <SDL_syswm.h>
+#include <array>
 
 #include "MyMath.h"
 #include "SDLWindow.h"
 #include <DirectXMath.h>
-#include "Box.h"
-#include "Torus.h"
-#include "GraphPlane.h"
+#include "Planet.h"
 #include "Bindable.h"
 #include "Camera.h"
+
+#include "Rotate.h"
+#include "Orbit.h"
 
 void ImGUiKeyboard();
 
@@ -70,30 +72,81 @@ int CALLBACK WinMain(
         // Setup project variables
         ImVec4 clear_color = ImVec4(0.6f, 0.6f, 0.6f, 1.0f);
         Camera cam;
-        Box box(window.Gfx(),
-            { 1.0f,1.0f,1.0f },
-            { 0.0f,2.0f,0.0f },
-            { 0.0f,0.0f,0.0f},
-            DirectX::XMFLOAT3(),
-            { 1.0f,0.0f,0.0f });
 
-        Torus tor(window.Gfx(),
-            { 1.0f,1.0f,1.0f },
-            { -0.370f,-1.481f,-0.523f },
-            DirectX::XMFLOAT3(), 
+        //0-sun
+        std::array<std::unique_ptr<Planet>,9> planets = {
+            std::make_unique<Planet>(window.Gfx(),
+            DirectX::XMFLOAT3(1.0f,1.0f,1.0f),
             DirectX::XMFLOAT3(),
-            { 1.0f,0.0f,0.0f },
-            DirectX::XMFLOAT3(),
-            0.5f);
+            DirectX::XMFLOAT3(),L"Textures/sun.jpg",
+            0.012f),
+            std::make_unique<Planet>(window.Gfx(),
+            DirectX::XMFLOAT3( 1.0f,1.0f,1.0f ),
+            DirectX::XMFLOAT3(5,0,0),
+            DirectX::XMFLOAT3(),L"Textures/mercury.png",
+            0.005f),
+            std::make_unique<Planet>(window.Gfx(),
+            DirectX::XMFLOAT3(1.0f,1.0f,1.0f),
+            DirectX::XMFLOAT3(10,0,0),
+            DirectX::XMFLOAT3(),L"Textures/venus.png",
+            0.007f),
+            std::make_unique<Planet>(window.Gfx(),
+            DirectX::XMFLOAT3(1.0f,1.0f,1.0f),
+            DirectX::XMFLOAT3(20,0,0),
+            DirectX::XMFLOAT3(),L"Textures/earth.png",
+            0.007f),
+            std::make_unique<Planet>(window.Gfx(),
+            DirectX::XMFLOAT3(1.0f,1.0f,1.0f),
+            DirectX::XMFLOAT3(25,0,0),
+            DirectX::XMFLOAT3(),L"Textures/mars.png",
+            0.006f),
+            std::make_unique<Planet>(window.Gfx(),
+            DirectX::XMFLOAT3(1.0f,1.0f,1.0f),
+            DirectX::XMFLOAT3(30,0,0),
+            DirectX::XMFLOAT3(),L"Textures/jupiter.png",
+            0.01f),
+            std::make_unique<Planet>(window.Gfx(),
+            DirectX::XMFLOAT3(1.0f,1.0f,1.0f),
+            DirectX::XMFLOAT3(35,0,0),
+            DirectX::XMFLOAT3(),L"Textures/saturn.png",
+            0.009f),
+            std::make_unique<Planet>(window.Gfx(),
+            DirectX::XMFLOAT3(1.0f,1.0f,1.0f),
+            DirectX::XMFLOAT3(40,0,0),
+            DirectX::XMFLOAT3(),L"Textures/uranus.png",
+            0.008f),
+            std::make_unique<Planet>(window.Gfx(),
+            DirectX::XMFLOAT3(1.0f,1.0f,1.0f),
+            DirectX::XMFLOAT3(45,0,0),
+            DirectX::XMFLOAT3(),L"Textures/neptune.png",
+            0.008f)
+        };
+        float constexpr orbitTime[] = {
+            87.97f,
+            224.7f,
+            365.26f,
+            1.88f*365,
+            11.86f*365/5,
+            29.46f*365/5,
+            84.01f*365/10,
+            164.79f*365/18
+        };
+        float constexpr revolutionTime[] = {
+            58.6f,
+            243.0f,
+            0.99f,
+            1.03f,
+            0.41f,
+            0.45f,
+            0.72f,
+            0.67f
+        };
+        for (int i = 1; i < 9; i++)
+        {
+            planets[i]->addTransformation(std::make_shared<Orbit>(DirectX::XMFLOAT3(), 1.0f/orbitTime[i-1]));
+            planets[i]->addTransformation(std::make_shared<Rotate>(0.0f, 0.0f, PI / revolutionTime[i - 1]));
+        }
 
-        GraphPlane graph(window.Gfx(),
-            { 10.0f,10.0f,0.5f },
-            { 0.0f,0.0f,-1.0f },
-            DirectX::XMFLOAT3(),
-            DirectX::XMFLOAT3(),
-            DirectX::XMFLOAT3(),
-            DirectX::XMFLOAT3(), 10.0f
-        );
         DirectX::XMFLOAT3 pos = { 5.0f,0.0f,0.0f };
 ;       ImVec4 vel;
         float incr = 0.1f;
@@ -231,14 +284,18 @@ int CALLBACK WinMain(
             cam.SetPositionSph(pos);
             window.Gfx().SetCamera(cam.GetMatrix());
 
-            box.Update(1.0f / 60);
-            tor.Update(1.0f / 60);
-            graph.Update(1.0f / 60);
+            for (int i = 0; i < planets.size(); i++)
+            {
+                planets[i]->Update(1.0f / 60);
+            }
             //render
             window.Gfx().ClearBuffer(clear_color);
-            box.Draw(window.Gfx());
-            tor.Draw(window.Gfx());
-            graph.Draw(window.Gfx());
+            //box.Draw(window.Gfx());
+            for (int i = 0; i < planets.size(); i++)
+            {
+                planets[i]->Draw(window.Gfx());
+            }
+            //graph.Draw(window.Gfx());
 
             // Start the Dear ImGui frame
             ImGui_ImplDX11_NewFrame();

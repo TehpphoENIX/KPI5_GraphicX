@@ -159,7 +159,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Box.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ChiliException.cpp" />
     <ClCompile Include="ChiliUtil.cpp" />
@@ -168,7 +167,6 @@
     <ClCompile Include="DxgiInfoManager.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="GraphicsResource.cpp" />
-    <ClCompile Include="GraphPlane.cpp" />
     <ClCompile Include="ImGUI\imgui.cpp" />
     <ClCompile Include="ImGUI\imgui_demo.cpp" />
     <ClCompile Include="ImGUI\imgui_draw.cpp" />
@@ -178,20 +176,26 @@
     <ClCompile Include="ImGUI\imgui_widgets.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="InputLayout.cpp" />
+    <ClCompile Include="Move.cpp" />
     <ClCompile Include="MyMath.cpp" />
+    <ClCompile Include="Orbit.cpp" />
     <ClCompile Include="PixelShader.cpp" />
+    <ClCompile Include="PointLight.cpp" />
+    <ClCompile Include="Rotate.cpp" />
+    <ClCompile Include="Sampler.cpp" />
     <ClCompile Include="SDLWindow.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Topology.cpp" />
-    <ClCompile Include="Torus.cpp" />
+    <ClCompile Include="Planet.cpp" />
     <ClCompile Include="TransformCbuf.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="VertexShader.cpp" />
+    <ClCompile Include="WIC.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bindable.h" />
     <ClInclude Include="BindableBase.h" />
-    <ClInclude Include="Box.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliUtil.h" />
@@ -204,7 +208,6 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="GraphicsResource.h" />
     <ClInclude Include="GraphicsThrowMacros.h" />
-    <ClInclude Include="GraphPlane.h" />
     <ClInclude Include="ImGUI\imconfig.h" />
     <ClInclude Include="ImGUI\imgui.h" />
     <ClInclude Include="ImGUI\imgui_impl_dx11.h" />
@@ -216,14 +219,22 @@
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="IndexedTriangleList.h" />
     <ClInclude Include="InputLayout.h" />
+    <ClInclude Include="Move.h" />
     <ClInclude Include="MyMath.h" />
+    <ClInclude Include="Orbit.h" />
     <ClInclude Include="PixelShader.h" />
+    <ClInclude Include="PointLight.h" />
+    <ClInclude Include="Rotate.h" />
+    <ClInclude Include="Sampler.h" />
     <ClInclude Include="SDLWindow.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Topology.h" />
-    <ClInclude Include="Torus.h" />
+    <ClInclude Include="Planet.h" />
+    <ClInclude Include="Transformation.h" />
     <ClInclude Include="TransformCbuf.h" />
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="VertexShader.h" />
+    <ClInclude Include="WIC.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ColorIndexPS.hlsl">
@@ -245,6 +256,22 @@
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
     </FxCompile>
+    <FxCompile Include="TexturedPhongPS.hlsl" />
+    <FxCompile Include="TexturedPhongVS.hlsl" />
+    <FxCompile Include="TexturedPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="TexturedVS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
@@ -252,6 +279,9 @@
     <None Include="DXGetErrorDescription.inl" />
     <None Include="DXGetErrorString.inl" />
     <None Include="DXTrace.inl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Textures\Checker.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
