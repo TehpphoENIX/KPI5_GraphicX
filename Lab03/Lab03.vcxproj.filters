@@ -123,6 +123,21 @@
     <Filter Include="My App\Lights\PointLight">
       <UniqueIdentifier>{74fb6a48-08cd-4197-9d44-c188351844f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="My App\Drawable\Sun">
+      <UniqueIdentifier>{0a1d948b-d70f-4816-9e12-92e20a029590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Lights\LightManager">
+      <UniqueIdentifier>{2d3f2fb9-1382-4be1-9177-5923e444846e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Drawable\Box">
+      <UniqueIdentifier>{74b1748c-1ac2-4231-ad57-8d09be1b01cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Bindable\CubeTexture">
+      <UniqueIdentifier>{0b07b4fa-2e83-4d23-a36c-697e78cda95e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Geometry\Surface">
+      <UniqueIdentifier>{e3b2c422-c904-4671-b80d-08794ae46a33}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImGUI\imgui.cpp">
@@ -218,11 +233,26 @@
     <ClCompile Include="Rotate.cpp">
       <Filter>My App\Transformations\Rotate</Filter>
     </ClCompile>
-    <ClCompile Include="Orbit.cpp">
-      <Filter>My App</Filter>
-    </ClCompile>
     <ClCompile Include="PointLight.cpp">
       <Filter>My App\Lights\PointLight</Filter>
+    </ClCompile>
+    <ClCompile Include="Sun.cpp">
+      <Filter>My App\Drawable\Sun</Filter>
+    </ClCompile>
+    <ClCompile Include="Orbit.cpp">
+      <Filter>My App\Transformations\Orbit</Filter>
+    </ClCompile>
+    <ClCompile Include="LightManager.cpp">
+      <Filter>My App\Lights\LightManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>My App\Drawable\Box</Filter>
+    </ClCompile>
+    <ClCompile Include="CubeTexture.cpp">
+      <Filter>My App\Bindable\CubeTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="Surface.cpp">
+      <Filter>My App\Geometry\Surface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -343,9 +373,26 @@
     <ClInclude Include="Rotate.h">
       <Filter>My App\Transformations\Rotate</Filter>
     </ClInclude>
-    <ClInclude Include="Orbit.h" />
     <ClInclude Include="PointLight.h">
       <Filter>My App\Lights\PointLight</Filter>
+    </ClInclude>
+    <ClInclude Include="Sun.h">
+      <Filter>My App\Drawable\Sun</Filter>
+    </ClInclude>
+    <ClInclude Include="Orbit.h">
+      <Filter>My App\Transformations\Orbit</Filter>
+    </ClInclude>
+    <ClInclude Include="LightManager.h">
+      <Filter>My App\Lights\LightManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>My App\Drawable\Box</Filter>
+    </ClInclude>
+    <ClInclude Include="CubeTexture.h">
+      <Filter>My App\Bindable\CubeTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="Surface.h">
+      <Filter>My App\Geometry\Surface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

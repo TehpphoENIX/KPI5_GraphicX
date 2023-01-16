@@ -72,19 +72,7 @@ Planet::Planet(Graphics& gfx,
 
 		AddIndexBuffer(std::make_unique<IndexBuffer>(gfx, indices));
 
-		auto pvs = std::make_unique<VertexShader>(gfx, L"TexturedVS.cso");
-		auto pvsbc = pvs->GetBytecode();
-		AddBind(std::move(pvs));
-
-		AddBind(std::make_unique<PixelShader>(gfx, L"TexturedPS.cso"));
-
-		const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
-		{
-			{ "Position",0,DXGI_FORMAT_R32G32B32_FLOAT,0,0,D3D11_INPUT_PER_VERTEX_DATA,0 },
-			{ "Normal",0,DXGI_FORMAT_R32G32B32_FLOAT,0,12,D3D11_INPUT_PER_VERTEX_DATA,0 },
-			{ "TexCoord",0,DXGI_FORMAT_R32G32_FLOAT,0,24,D3D11_INPUT_PER_VERTEX_DATA,0}
-		};
-		AddBind(std::make_unique<InputLayout>(gfx, ied, pvsbc));
+		AddTextureBinds(gfx);
 
 		AddBind(std::make_unique<Topology>(gfx, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
 
@@ -92,6 +80,10 @@ Planet::Planet(Graphics& gfx,
 		AddBind(std::make_unique<Texture>(gfx, texture));
 		//Sampler
 		AddBind(std::make_unique<Sampler>(gfx));
+
+		materialConstants.specularIntensity = 1.0f;
+		materialConstants.specularPower = 5.0f;
+		AddBind(std::make_unique<PixelConstantBuffer<PSMaterialConstant>>(gfx, materialConstants, 0u));
 
 		//struct PSMaterialConstant
 		//{
@@ -145,4 +137,21 @@ DirectX::XMMATRIX Planet::GetTransformXM() const noexcept
 	return dx::XMLoadFloat3x3(&mt) *
 		dx::XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z) *
 		dx::XMMatrixTranslation(position.x, position.y, position.z);
+}
+
+void Planet::AddTextureBinds(Graphics& gfx)
+{
+	auto pvs = std::make_unique<VertexShader>(gfx, L"TexturedPhongVS.cso");
+	auto pvsbc = pvs->GetBytecode();
+	AddBind(std::move(pvs));
+
+	AddBind(std::make_unique<PixelShader>(gfx, L"TexturedPhongPS.cso"));
+
+	const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
+	{
+		{ "Position",0,DXGI_FORMAT_R32G32B32_FLOAT,0,0,D3D11_INPUT_PER_VERTEX_DATA,0 },
+		{ "Normal",0,DXGI_FORMAT_R32G32B32_FLOAT,0,12,D3D11_INPUT_PER_VERTEX_DATA,0 },
+		{ "TexCoord",0,DXGI_FORMAT_R32G32_FLOAT,0,24,D3D11_INPUT_PER_VERTEX_DATA,0}
+	};
+	AddBind(std::make_unique<InputLayout>(gfx, ied, pvsbc));
 }

@@ -20,6 +20,8 @@
 #include "Planet.h"
 #include "Bindable.h"
 #include "Camera.h"
+#include "PointLight.h"
+#include "LightManager.h"
 
 #include "Rotate.h"
 #include "Orbit.h"
@@ -68,18 +70,18 @@ int CALLBACK WinMain(
         // Setup window
         // Setup Platform/Renderer backends
         SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_ALLOW_HIGHDPI);
-        Window window("My new windoW", { 640,480 }, window_flags);
+        Window window("My new windoW", { 1920,1080 }, window_flags);
         // Setup project variables
-        ImVec4 clear_color = ImVec4(0.6f, 0.6f, 0.6f, 1.0f);
+        ImVec4 clear_color = ImVec4(0.001f, 0.001f, 0.001f, 1.0f);
         Camera cam;
 
+        LightManager lm(window.Gfx());
+
+        lm.Add(std::make_unique<PointLight>(window.Gfx(), DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f), DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f)));
+        lm.Add(std::make_unique<PointLight>(window.Gfx(), DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f), DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f),L"Textures/white.jfif",0.001f));
+
         //0-sun
-        std::array<std::unique_ptr<Planet>,9> planets = {
-            std::make_unique<Planet>(window.Gfx(),
-            DirectX::XMFLOAT3(1.0f,1.0f,1.0f),
-            DirectX::XMFLOAT3(),
-            DirectX::XMFLOAT3(),L"Textures/sun.jpg",
-            0.012f),
+        std::array<std::unique_ptr<Planet>,8> planets = {
             std::make_unique<Planet>(window.Gfx(),
             DirectX::XMFLOAT3( 1.0f,1.0f,1.0f ),
             DirectX::XMFLOAT3(5,0,0),
@@ -121,6 +123,7 @@ int CALLBACK WinMain(
             DirectX::XMFLOAT3(),L"Textures/neptune.png",
             0.008f)
         };
+
         float constexpr orbitTime[] = {
             87.97f,
             224.7f,
@@ -131,6 +134,7 @@ int CALLBACK WinMain(
             84.01f*365/10,
             164.79f*365/18
         };
+
         float constexpr revolutionTime[] = {
             58.6f,
             243.0f,
@@ -141,10 +145,11 @@ int CALLBACK WinMain(
             0.72f,
             0.67f
         };
-        for (int i = 1; i < 9; i++)
+
+        for (int i = 0; i < 8; i++)
         {
-            planets[i]->addTransformation(std::make_shared<Orbit>(DirectX::XMFLOAT3(), 1.0f/orbitTime[i-1]));
-            planets[i]->addTransformation(std::make_shared<Rotate>(0.0f, 0.0f, PI / revolutionTime[i - 1]));
+            planets[i]->addTransformation(std::make_shared<Orbit>(DirectX::XMFLOAT3(), 1.0f / orbitTime[i]));
+            planets[i]->addTransformation(std::make_shared<Rotate>(0.0f, 0.0f, PI / revolutionTime[i]));
         }
 
         DirectX::XMFLOAT3 pos = { 5.0f,0.0f,0.0f };
@@ -283,25 +288,29 @@ int CALLBACK WinMain(
             //Set enviroment updates
             cam.SetPositionSph(pos);
             window.Gfx().SetCamera(cam.GetMatrix());
-
             for (int i = 0; i < planets.size(); i++)
             {
                 planets[i]->Update(1.0f / 60);
             }
             //render
             window.Gfx().ClearBuffer(clear_color);
-            //box.Draw(window.Gfx());
+            //sun.Bind(window.Gfx(), cam.GetMatrix());
+            //secondSun.Bind(window.Gfx(), cam.GetMatrix());
+            lm.Bind(window.Gfx(), cam.GetMatrix());
+            lm.Draw(window.Gfx());
             for (int i = 0; i < planets.size(); i++)
             {
                 planets[i]->Draw(window.Gfx());
             }
-            //graph.Draw(window.Gfx());
+
 
             // Start the Dear ImGui frame
             ImGui_ImplDX11_NewFrame();
             ImGui_ImplSDL2_NewFrame();
             ImGui::NewFrame();
             cam.SpawnControlWindow();
+            lm.Get(1)->SpawnControlWindow();
+            
 #ifndef NDEBUG
             if (show_demo_window)
                 ImGui::ShowDemoWindow(&show_demo_window);
@@ -350,6 +359,7 @@ int CALLBACK WinMain(
     {
         MessageBoxA(nullptr, "No details available", "Unknown Exception", MB_OK | MB_ICONEXCLAMATION);
     }
+    return 0;
 }
 void ImGUiKeyboard() {
 

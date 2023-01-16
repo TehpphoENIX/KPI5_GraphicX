@@ -1,12 +1,11 @@
 #include "PointLight.h"
 #include "imgui/imgui.h"
 
-PointLight::PointLight( Graphics& gfx,float radius )
+PointLight::PointLight(Graphics& gfx, DirectX::XMFLOAT3 position, DirectX::XMFLOAT3 rotation, std::wstring texture, float scale)
 	:
-	mesh( gfx,radius ),
-	cbuf( gfx )
+	mesh(gfx, { 1.0f,1.0f,1.0f }, position, rotation, texture, scale)
 {
-	Reset();
+	Reset(position);
 }
 
 void PointLight::SpawnControlWindow() noexcept
@@ -19,14 +18,14 @@ void PointLight::SpawnControlWindow() noexcept
 		ImGui::SliderFloat( "Z",&cbData.pos.z,-60.0f,60.0f,"%.1f" );
 		
 		ImGui::Text( "Intensity/Color" );
-		ImGui::SliderFloat( "Intensity",&cbData.diffuseIntensity,0.01f,2.0f,"%.2f",2 );
+		ImGui::SliderFloat( "Intensity",&cbData.diffuseIntensity,0.01f,2.0f,"%.2f", ImGuiSliderFlags_AlwaysClamp);
 		ImGui::ColorEdit3( "Diffuse Color",&cbData.diffuseColor.x );
 		ImGui::ColorEdit3( "Ambient",&cbData.ambient.x );
 		
 		ImGui::Text( "Falloff" );
-		ImGui::SliderFloat( "Constant",&cbData.attConst,0.05f,10.0f,"%.2f",4 );
-		ImGui::SliderFloat( "Linear",&cbData.attLin,0.0001f,4.0f,"%.4f",8 );
-		ImGui::SliderFloat( "Quadratic",&cbData.attQuad,0.0000001f,10.0f,"%.7f",10 );
+		ImGui::SliderFloat( "Constant",&cbData.attConst,0.05f,10.0f,"%.2f",0 );
+		ImGui::SliderFloat( "Linear",&cbData.attLin,0.0001f,4.0f,"%.4f", ImGuiSliderFlags_Logarithmic);
+		ImGui::SliderFloat( "Quadratic",&cbData.attQuad,0.0000001f,10.0f,"%.7f", ImGuiSliderFlags_Logarithmic);
 
 		if( ImGui::Button( "Reset" ) )
 		{
@@ -36,30 +35,30 @@ void PointLight::SpawnControlWindow() noexcept
 	ImGui::End();
 }
 
-void PointLight::Reset() noexcept
+void PointLight::Reset(DirectX::XMFLOAT3 position) noexcept
 {
 	cbData = {
-		{ 0.0f,0.0f,0.0f },
-		{ 0.05f,0.05f,0.05f },
-		{ 1.0f,1.0f,1.0f },
-		1.0f,
-		1.0f,
-		0.045f,
-		0.0075f,
+		{ 0.0f,0.0f,0.0f },//pos
+		{ 0.0f,0.0f,0.0f },//amb
+		{ 1.0f,1.0f,1.0f },//diffuse
+		2.0f,//dint
+		1.0f,//att0
+		0.022f,//att1
+		0.0019f,//att2
 	};
 }
 
 void PointLight::Draw( Graphics& gfx ) const noexcept(!IS_DEBUG)
 {
-	mesh.SetPos( cbData.pos );
+	mesh.UpdatePosition( cbData.pos );
 	mesh.Draw( gfx );
 }
 
-void PointLight::Bind( Graphics& gfx,DirectX::FXMMATRIX view ) const noexcept
-{
-	auto dataCopy = cbData;
-	const auto pos = DirectX::XMLoadFloat3( &cbData.pos );
-	DirectX::XMStoreFloat3( &dataCopy.pos,DirectX::XMVector3Transform( pos,view ) );
-	cbuf.Update( gfx,dataCopy );
-	cbuf.Bind( gfx );
-}
+//void PointLight::Bind( Graphics& gfx,DirectX::FXMMATRIX view ) const noexcept
+//{
+//	auto dataCopy = cbData;
+//	const auto pos = DirectX::XMLoadFloat3( &cbData.pos );
+//	DirectX::XMStoreFloat3( &dataCopy.pos,DirectX::XMVector3Transform( pos,view ) );
+//	cbuf.Update( gfx,dataCopy );
+//	cbuf.Bind( gfx );
+//}

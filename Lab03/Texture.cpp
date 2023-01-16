@@ -20,3 +20,4 @@ void Texture::Bind(Graphics& gfx) noexcept
 {
 	GetContext(gfx)->PSSetShaderResources(0u, 1u, pTextureView.GetAddressOf());
 }
+
