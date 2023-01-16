@@ -22,6 +22,7 @@
 #include "Camera.h"
 #include "PointLight.h"
 #include "LightManager.h"
+#include "Box.h"
 
 #include "Rotate.h"
 #include "Orbit.h"
@@ -79,6 +80,11 @@ int CALLBACK WinMain(
 
         lm.Add(std::make_unique<PointLight>(window.Gfx(), DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f), DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f)));
         lm.Add(std::make_unique<PointLight>(window.Gfx(), DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f), DirectX::XMFLOAT3(0.0f, 0.0f, 0.0f),L"Textures/white.jfif",0.001f));
+
+        Box sky(window.Gfx(), 
+            DirectX::XMFLOAT3(20.0f, 20.0f, 20.0f), 
+            DirectX::XMFLOAT3(),
+            DirectX::XMFLOAT3());
 
         //0-sun
         std::array<std::unique_ptr<Planet>,8> planets = {
@@ -302,7 +308,7 @@ int CALLBACK WinMain(
             {
                 planets[i]->Draw(window.Gfx());
             }
-
+            sky.Draw(window.Gfx());
 
             // Start the Dear ImGui frame
             ImGui_ImplDX11_NewFrame();

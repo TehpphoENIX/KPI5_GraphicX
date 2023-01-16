@@ -187,6 +187,7 @@
     <ClCompile Include="Rotate.cpp" />
     <ClCompile Include="Sampler.cpp" />
     <ClCompile Include="SDLWindow.cpp" />
+    <ClCompile Include="SkyboxTransformCbuf.cpp" />
     <ClCompile Include="Sun.cpp" />
     <ClCompile Include="Surface.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -235,6 +236,7 @@
     <ClInclude Include="Rotate.h" />
     <ClInclude Include="Sampler.h" />
     <ClInclude Include="SDLWindow.h" />
+    <ClInclude Include="SkyboxTransformCbuf.h" />
     <ClInclude Include="Sun.h" />
     <ClInclude Include="Surface.h" />
     <ClInclude Include="Texture.h" />
@@ -265,6 +267,14 @@
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Skybox_PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Skybox_VS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
     </FxCompile>
     <FxCompile Include="TexturedPhongPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>

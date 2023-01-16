@@ -689,3 +689,4 @@ HRESULT CreateWICTextureFromFile(_In_ ID3D11Device* d3dDevice,
 
     return hr;
 }
+

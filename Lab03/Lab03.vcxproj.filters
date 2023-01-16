@@ -138,6 +138,12 @@
     <Filter Include="My App\Geometry\Surface">
       <UniqueIdentifier>{e3b2c422-c904-4671-b80d-08794ae46a33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader\SkyBox">
+      <UniqueIdentifier>{041aaa12-afa4-4f53-ada1-835901b1365b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="My App\Bindable\SkyBoxTransformCbuf">
+      <UniqueIdentifier>{e877221b-5af7-43f6-9a5e-adad466e51bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImGUI\imgui.cpp">
@@ -253,6 +259,9 @@
     </ClCompile>
     <ClCompile Include="Surface.cpp">
       <Filter>My App\Geometry\Surface</Filter>
+    </ClCompile>
+    <ClCompile Include="SkyboxTransformCbuf.cpp">
+      <Filter>My App\Bindable\SkyBoxTransformCbuf</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -394,6 +403,9 @@
     <ClInclude Include="Surface.h">
       <Filter>My App\Geometry\Surface</Filter>
     </ClInclude>
+    <ClInclude Include="SkyboxTransformCbuf.h">
+      <Filter>My App\Bindable\SkyBoxTransformCbuf</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ColorIndexPS.hlsl">
@@ -413,6 +425,12 @@
     </FxCompile>
     <FxCompile Include="TexturedPhongVS.hlsl">
       <Filter>Shader\Phong</Filter>
+    </FxCompile>
+    <FxCompile Include="Skybox_VS.hlsl">
+      <Filter>Shader\SkyBox</Filter>
+    </FxCompile>
+    <FxCompile Include="Skybox_PS.hlsl">
+      <Filter>Shader\SkyBox</Filter>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

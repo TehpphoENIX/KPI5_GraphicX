@@ -3,7 +3,6 @@
 #include "GraphicsThrowMacros.h"
 #include "BindableCodex.h"
 #include <vector>
-#include <SDL.h>
 
 
 CubeTexture::CubeTexture(Graphics& gfx, const std::string& path, UINT slot)
@@ -24,8 +23,8 @@ CubeTexture::CubeTexture(Graphics& gfx, const std::string& path, UINT slot)
 
 	// texture descriptor
 	D3D11_TEXTURE2D_DESC textureDesc = {};
-	textureDesc.Width = surfaces[0].GetWidth();
-	textureDesc.Height = surfaces[0].GetHeight();
+	textureDesc.Width = surfaces[0].GetWidth();//this
+	textureDesc.Height = surfaces[0].GetHeight();//this
 	textureDesc.MipLevels = 1;
 	textureDesc.ArraySize = 6;
 	textureDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
@@ -39,8 +38,8 @@ CubeTexture::CubeTexture(Graphics& gfx, const std::string& path, UINT slot)
 	D3D11_SUBRESOURCE_DATA data[6];
 	for (int i = 0; i < 6; i++)
 	{
-		data[i].pSysMem = surfaces[i].GetBufferPtrConst();
-		data[i].SysMemPitch = surfaces[i].GetBytePitch();
+		data[i].pSysMem = surfaces[i].GetBufferPtrConst();//this
+		data[i].SysMemPitch = surfaces[i].GetBytePitch();//this
 		data[i].SysMemSlicePitch = 0;
 	}
 	// create the texture resource
