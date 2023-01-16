@@ -62,7 +62,7 @@ Box::Box(Graphics& gfx,
 	auto pvsbc = pvs->GetBytecode();
 	AddBind(std::move(pvs));
 	//Texture
-	AddBind(std::make_unique<CubeTexture>(gfx, "Textures/SpaceBox"));
+	AddBind(std::make_unique<CubeTexture>(gfx, "Textures/StarsBox"));
 	//Sampler
 	AddBind(std::make_unique<Sampler>(gfx));
 	//PixelShader
